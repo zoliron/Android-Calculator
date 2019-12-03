@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Variables to hold the operands and type of calculations
     private Double operand1 = null;
-    private String pendingOperation = "=";
+    private String pendingOperation = "";
 
     private static final String STATE_PENDING_OPERATION = "PendingOperation";
     private static final String STATE_OPERAND1 = "Operand1";
@@ -89,6 +89,28 @@ public class MainActivity extends AppCompatActivity {
         buttonMultiply.setOnClickListener(opListener);
         buttonMinus.setOnClickListener(opListener);
         buttonPlus.setOnClickListener(opListener);
+
+        // Neg button onClickListener
+        Button buttonNeg = findViewById(R.id.buttonNeg);
+        buttonNeg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String value = newNumber.getText().toString();
+                if (value.length() == 0) {
+                    newNumber.setText("-");
+                } else {
+                    try {
+                        Double doubleValue = Double.valueOf(value);
+                        doubleValue *= -1;
+                        newNumber.setText(doubleValue.toString());
+                    } catch (NumberFormatException e) {
+                        // newNumber was "-" or ".", so clear it
+                        newNumber.setText("");
+                    }
+                }
+            }
+        });
+
     }
 
     @Override
@@ -108,12 +130,12 @@ public class MainActivity extends AppCompatActivity {
         displayOperation.setText(pendingOperation);
     }
 
-    private void performOperation(Double value, String op) {
-        if (operand1 == null) {
+    private void performOperation(Double value, String operation) {
+        if (null == operand1) {
             operand1 = value;
         } else {
             if (pendingOperation.equals("=")) {
-                pendingOperation = op;
+                pendingOperation = operation;
             }
             switch (pendingOperation) {
                 case "=":
