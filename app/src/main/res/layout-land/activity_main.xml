@@ -176,6 +176,17 @@
         app:layout_constraintStart_toEndOf="@+id/buttonDivide" />
 
     <Button
+        android:id="@+id/buttonClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:minWidth="48dp"
+        android:text="Clr"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonPlus"
+        app:layout_constraintStart_toEndOf="@+id/buttonPlus" />
+
+    <Button
         android:id="@+id/buttonEquals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
